@@ -18,14 +18,14 @@ export struct ListItemComponent {
           right: $r('app.float.list_image_margin_right')
         })
       Column() {
-        Text(this.itemInfo.title)
+        Text(this.itemInfo.detail)
           .fontSize($r('app.float.list_item_title'))
           .fontColor($r('app.color.list_item_title'))
           .maxLines(CommonConstants.LIST_TITLE_MAX_LINES)
           .textOverflow({
             overflow: TextOverflow.Ellipsis
           })
-        Text(this.itemInfo.subTitle)
+        Text(this.itemInfo.subDetail)
           .fontSize($r('app.float.list_item_sub_title'))
           .fontColor($r('app.color.list_item_sub_title'))
           .maxLines(CommonConstants.LIST_TITLE_MAX_LINES)

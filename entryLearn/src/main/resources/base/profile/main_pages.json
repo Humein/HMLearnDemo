@@ -1,6 +1,8 @@
 {
   "src": [
     "pages/ListPage",
-    "pages/LearnPages/HelloWorld"
+    "pages/LearnPages/HelloWorld",
+    "pages/LearnPages/TabContent",
+    "pages/LearnPages/bindSheet"
   ]
 }

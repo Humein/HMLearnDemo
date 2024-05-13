@@ -18,11 +18,15 @@ export struct ListAreaComponent {
             ListItemComponent({ itemInfo: item })
           }
           .onClick(() => {
-            console.log('111111')
+            console.log('xx----item', item.subDetail)
+            // pages/LearnPages/HelloWorld
+            // pages/LearnPages/ListDemo
+            //  CommonConstants.PAGE_NAME,
+            // pages/LearnPages/bindSheet
             router.pushUrl({
-              url: CommonConstants.PAGE_NAME,
+              url: item.subDetail,
               params: {
-                data: item.title
+                data: item.detail
               }
             });
           })

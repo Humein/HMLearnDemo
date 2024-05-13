@@ -20,7 +20,17 @@ export class PageViewModel {
       itemInfo.title = $r('app.string.list_item_title');
       switch (i) {
         case 0:
-          itemInfo.title =  $r('app.string.list_item_title_0');
+          itemInfo.detail = 'HelloWorld'
+          itemInfo.subDetail = 'pages/LearnPages/HelloWorld';
+          break
+        case 1:
+          itemInfo.detail = 'ListDemo'
+          itemInfo.subDetail = 'pages/LearnPages/ListDemo';
+          break
+        case 2:
+          itemInfo.detail = '筛选弹窗 以及 TAB'
+          itemInfo.subDetail = 'pages/LearnPages/bindSheet';
+          break
       }
       itemInfo.subTitle = $r('app.string.list_item_sub_title');
       itemInfo.summary = $r('app.string.list_item_summary');

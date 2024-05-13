@@ -12,10 +12,14 @@ export class DataItem {
    */
   title: Resource = $r('app.string.list_item_title');
 
+  detail: string = ''
+
   /**
    * Sub title of list item.
    */
   subTitle: Resource = $r('app.string.list_item_sub_title');
+
+  subDetail: string = ''
 
   /**
    * Summary of list item.
