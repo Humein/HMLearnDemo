@@ -1,3 +1,5 @@
+// 整合学习MVP的文件
+
 import { util } from '@kit.ArkTS';
 
 // 定义一个Animal接口，有一个可选属性color
@@ -181,7 +183,7 @@ export struct SimpleContacts {
     const model = new EmployeeNet();
     this.presenter = new Presenter(model, this);
     console.log('xx-----在这里填充数据必须使用 @State修饰 this.leftContact ', this.leftContact[0].name)
-    console.log('xx-----打印 presenter this.leftContact ',  this.presenter)
+    console.log('xx-----打印 presenter  ',  this.presenter)
 
   }
 

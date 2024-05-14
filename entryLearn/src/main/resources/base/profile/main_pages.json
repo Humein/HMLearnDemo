@@ -4,6 +4,7 @@
     "pages/LearnPages/HelloWorld",
     "pages/LearnPages/TabContent",
     "pages/LearnPages/bindSheet",
-    "MVPLearn/Presenter/Contractnterface"
+    "MVPLearn/Presenter/Contractnterface",
+    "MVPLearn/View/ListView"
   ]
 }

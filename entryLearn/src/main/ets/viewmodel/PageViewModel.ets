@@ -32,9 +32,14 @@ export class PageViewModel {
           itemInfo.subDetail = 'pages/LearnPages/bindSheet';
           break
         case 3:
-          itemInfo.detail = 'MVP'
+          itemInfo.detail = 'MVP和 Model接口 学习整合'
           itemInfo.subDetail = 'MVPLearn/Presenter/Contractnterface'
           break
+        case 4:
+          itemInfo.detail = 'MVP 文件分层'
+          itemInfo.subDetail = 'MVPLearn/View/ListView'
+          break
+
       }
       itemInfo.subTitle = $r('app.string.list_item_sub_title');
       itemInfo.summary = $r('app.string.list_item_summary');

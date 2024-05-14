@@ -1,83 +1,43 @@
-import util from '@ohos.util';
-
-class Contact {
-  key: string = util.generateRandomUUID(true);
-  name: string;
-  icon: Resource;
-
-  constructor(name: string, icon: Resource) {
-    this.name = name;
-    this.icon = icon;
-  }
-}
-
-
-class LeftContact {
-  key: string = util.generateRandomUUID(true);
-  name: string;
-
-  constructor(name: string) {
-    this.name = name;
-  }
-}
+// view.ts
+import { Model } from '../Model/Model';
+import { IPPresenter, Presenter } from '../Presenter/Persenter';
 
 @Entry
 @Component
-export struct SimpleContacts {
-  private contacts: Array<object> = [
-    new Contact('小明', $r("app.media.ic_activated")),
-    new Contact('小红', $r("app.media.ic_activated")),
-    new Contact('小明', $r("app.media.ic_activated")),
-    new Contact('小红', $r("app.media.ic_activated")),
-    new Contact('小明', $r("app.media.ic_activated")),
-    new Contact('小红', $r("app.media.ic_activated")),
-    new Contact('小明', $r("app.media.ic_activated")),
-    new Contact('小红', $r("app.media.ic_activated")),
-    new Contact('小明', $r("app.media.ic_activated")),
-    new Contact('小红', $r("app.media.ic_activated")),
-  ]
+export struct ListView {
+  @State data: string = "Loading...";
 
-  private leftContact: Array<object> = [
-    new LeftContact('1'),
-    new LeftContact('2'),
-    new LeftContact('1'),
-    new LeftContact('2'),
-    new LeftContact('1'),
-    new LeftContact('2'),
-    new LeftContact('1'),
-    new LeftContact('2'),
-    new LeftContact('1'),
-    new LeftContact('2'),
-  ]
+  private presenter!: IPPresenter;
+
+  public setPresenter(presenter: IPPresenter): void {
+    this.presenter = presenter;
+    this.presenter.onFetchData();
+  }
+
+  public updateView(data: string): void {
+    this.data = data;
+  }
+
+  onPageShow() {
+    // 将 Model、View 和 Presenter 实例化并整合在一起。
+    const model = new Model();
+    this.presenter = new Presenter(model, this);
+    console.log('xx-----打印 presenter',  this.presenter)
+
+  }
 
   build() {
-    Row({ space: 10 }) {
-      List() {
-        ForEach(this.leftContact, (item: LeftContact) => {
-          ListItem() {
-            Row() {
-              Text(item.name).fontSize(40)
-            }
-            .width('100%')
-            .justifyContent(FlexAlign.Start)
-          }
-        }, (item: Contact) => item.key.toString())
-      }.width('20%').height('50%').backgroundColor('#FFF1F3F5')
-      List() {
-        ForEach(this.contacts, (item: Contact) => {
-          ListItem() {
-            Row() {
-              Image(item.icon)
-                .width(40)
-                .height(40)
-                .margin(10)
-              Text(item.name).fontSize(20)
-            }
-            .width('100%')
-            .justifyContent(FlexAlign.Start)
-          }
-        }, (item: Contact) => item.key.toString())
-      }.width('80%').height('50%').backgroundColor(0xD2B48C)
-    }.width('100%')
+    Column() {
+      Text(this.data)
+        .fontSize(20)
+        .margin(10);
+      Button("Refresh")
+        .onClick(() => {
+          this.data = 'Loading...'
+          this.presenter.onFetchData();
+        })
+        .fontSize(20)
+        .margin(10);
+    }
   }
 }
