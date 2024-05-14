@@ -61,7 +61,7 @@ export struct SimpleContacts {
             .width('100%')
             .justifyContent(FlexAlign.Start)
           }
-        }, (item: LeftContact) => item.key.toString())
+        }, (item: Contact) => item.key.toString())
       }.width('20%').height('50%').backgroundColor('#FFF1F3F5')
       List() {
         ForEach(this.contacts, (item: Contact) => {

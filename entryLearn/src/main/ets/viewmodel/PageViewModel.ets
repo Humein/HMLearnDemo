@@ -24,12 +24,16 @@ export class PageViewModel {
           itemInfo.subDetail = 'pages/LearnPages/HelloWorld';
           break
         case 1:
-          itemInfo.detail = 'ListDemo'
-          itemInfo.subDetail = 'pages/LearnPages/ListDemo';
+          itemInfo.detail = 'TabContent + ListDemo'
+          itemInfo.subDetail = 'pages/LearnPages/TabContent';
           break
         case 2:
-          itemInfo.detail = '筛选弹窗 以及 TAB'
+          itemInfo.detail = '筛选弹窗'
           itemInfo.subDetail = 'pages/LearnPages/bindSheet';
+          break
+        case 3:
+          itemInfo.detail = 'MVP'
+          itemInfo.subDetail = 'MVPLearn/Presenter/Contractnterface'
           break
       }
       itemInfo.subTitle = $r('app.string.list_item_sub_title');

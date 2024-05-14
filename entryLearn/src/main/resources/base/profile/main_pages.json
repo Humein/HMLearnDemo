@@ -3,6 +3,7 @@
     "pages/ListPage",
     "pages/LearnPages/HelloWorld",
     "pages/LearnPages/TabContent",
-    "pages/LearnPages/bindSheet"
+    "pages/LearnPages/bindSheet",
+    "MVPLearn/Presenter/Contractnterface"
   ]
 }
