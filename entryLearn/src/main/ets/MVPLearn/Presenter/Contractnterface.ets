@@ -52,16 +52,39 @@ console.log(String(circle.calculateArea()));
 // FOR Harmony
 
 /*    MODEL      */
+// Model 负责处理应用程序的数据和业务逻辑。
+
+
 // 用于规范左侧选择数据；支持三种类型，时间：1，地点：2，更多
-interface IModel {
-  name: string
+export interface IModel {
+  // 以下为针对复用的View而定义的 model interface 字段
+  name?: string
   subTitle?: string;
   age?: number;
-  sayHello(): string; // sayHello方法，返回类型为void
+
+  // sayHello方法，返回类型为string
+  sayHello(): string;
+
+  // 网络请求 MVP中网络请求在model层
+  fetchData(): Promise<string>;
 }
 
+export class EmployeeNet implements IModel {
+  sayHello(): string {
+    return util.generateRandomUUID(true);
+  }
 
-class Employee implements IModel {
+  async fetchData(): Promise<string> {
+    // 模拟异步数据获取
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Hello from the EmployeeNet!");
+      }, 1000);
+    });
+  }
+}
+
+export class Employee implements IModel {
   id0?: string;
   name0?: string;
 
@@ -72,6 +95,15 @@ class Employee implements IModel {
 
   sayHello(): string {
     return util.generateRandomUUID(true);
+  }
+
+  async fetchData(): Promise<string> {
+    // 模拟异步数据获取
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Hello from the Employee!");
+      }, 1000);
+    });
   }
 }
 
@@ -86,48 +118,57 @@ class Employee1 implements IModel {
   sayHello(): string {
     return util.generateRandomUUID(true);
   }
+
+  async fetchData(): Promise<string> {
+    // 模拟异步数据获取
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Hello from the Employee1!");
+      }, 1000);
+    });
+  }
 }
 
 /*    Presenter      */
-interface iPresenter {
-  updateView(): void;
+// Presenter 作为 Model 和 View 之间的中介，处理从 View 获取的用户输入，并更新 Model 和 View。
+export interface IPresenter {
+  onFetchData(): void;
 }
 
-class EmployeePresenter implements iPresenter {
-  model: IModel;
-  // view: LeftContact;
+export class Presenter implements IPresenter {
+  private model: IModel;
+  private view: SimpleContacts;
 
-  constructor(model: IModel) {
+  constructor(model: IModel, view: SimpleContacts) {
     this.model = model;
-    // this.view = view;
+    this.view = view;
+    this.view.setPresenter(this);
   }
 
-  updateView(): void {
-
-  }
-}
-
-
-class LeftContact {
-  key: string = util.generateRandomUUID(true);
-  name: string;
-
-  constructor(name: string) {
-    this.name = name;
+  async onFetchData(): Promise<void> {
+    const data = await this.model.fetchData();
+    this.view.updateView(data);
   }
 }
 
 /*    VIEW      */
+// View 负责呈现数据和捕获用户交互。在 ArkTS 中，View 通常是一个 UI 组件。
 @Entry
 @Component
 export struct SimpleContacts {
+  @State private leftContact: Array<IModel> = []
 
-  private leftContact: Array<IModel> = [
-    new Employee('hahah'),
-    new Employee1('1'),
-    new Employee('0'),
-    new Employee1('2'),
-  ]
+  @State data: string = "Loading...";
+  private presenter?: IPresenter;
+
+  setPresenter(presenter: IPresenter): void {
+    this.presenter = presenter;
+    this.presenter.onFetchData();
+  }
+
+  updateView(data: string): void {
+    this.data = data;
+  }
 
   onPageShow() {
     this.leftContact = [
@@ -136,11 +177,16 @@ export struct SimpleContacts {
       new Employee('0'),
       new Employee1('2'),
     ]
-    console.log('xx-----this.leftContact 在这里填充数据不行', this.leftContact[0].name)
+    // 将 Model、View 和 Presenter 实例化并整合在一起。
+    const model = new EmployeeNet();
+    this.presenter = new Presenter(model, this);
+    console.log('xx-----在这里填充数据必须使用 @State修饰 this.leftContact ', this.leftContact[0].name)
+    console.log('xx-----打印 presenter this.leftContact ',  this.presenter)
+
   }
 
   build() {
-    Row({ space: 10 }) {
+    Column({ space: 10 }) {
       List() {
         ForEach(this.leftContact, (item: IModel) => {
           ListItem() {
@@ -153,6 +199,18 @@ export struct SimpleContacts {
           }
         },)
       }.width('100%').height('50%').backgroundColor('#FFF1F3F5')
-    }.width('100%')
+      Column() {
+        Text(this.data)
+          .fontSize(20)
+          .margin(10);
+        Button("Refresh")
+          .onClick(() => {
+            this.data = 'Loading...'
+            this.presenter?.onFetchData();
+          })
+          .fontSize(20)
+          .margin(10);
+      }.width('100%').height('50%').backgroundColor('#FFFFFFF')
+    }.height('100%')
   }
 }
