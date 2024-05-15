@@ -5,6 +5,7 @@ import { IPPresenter, Presenter } from '../Presenter/Persenter';
 @Entry
 @Component
 export struct ListView {
+  // ⚠️ 这个View 实际需要的字段值，而不是 接口 Model
   @State data: string = "Loading...";
 
   private presenter!: IPPresenter;
@@ -23,7 +24,6 @@ export struct ListView {
     const model = new Model();
     this.presenter = new Presenter(model, this);
     console.log('xx-----打印 presenter',  this.presenter)
-
   }
 
   build() {
