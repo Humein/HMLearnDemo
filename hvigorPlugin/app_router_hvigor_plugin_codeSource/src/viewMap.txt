@@ -1,0 +1,14 @@
+import { RouterMapInfo } from '{{routerDependencyName}}/Index';
+
+export function get{{isEntry}}RouterMap(): RouterMapInfo[] {
+  return mapInfo
+}
+
+const mapInfo: RouterMapInfo[] = [{{#each mapList}}{
+  "sort": "{{sort}}",
+  "path": "{{path}}",
+  "pageModule": "{{pageModule}}",
+  "pageName": "{{pageName}}",
+  "needLogin": {{needLogin}},
+  "autoExecute": {{autoExecute}}
+}, {{/each}}]

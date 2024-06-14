@@ -1,0 +1,25 @@
+{
+  "name": "app_router_hvigor_plugin",
+  "version": "1.0.3",
+  "description": "编译阶段生成路由表数据，便于实现动态路由功能",
+  "author": {
+    "name": "zhongrui",
+    "email": "zr2013123@sina.com"
+  },
+  "license": "MIT",
+  "homepage": "https://gitee.com/zhongrui_developer",
+  "repository": "https://gitee.com/zhongrui_developer/AppRouterProject/tree/master/hvigor_plugin/AppRouter",
+  "devDependencies": {
+    "@ohos/hvigor": "4.1.2",
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "typescript": "^5.4.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

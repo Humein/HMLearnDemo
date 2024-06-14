@@ -1,0 +1,18 @@
+import { {{routerClassName}} } from '{{routerDependencyName}}/Index';
+{{#each viewList}}
+import { {{viewName}} } from '{{viewPath}}'
+{{/each}}
+
+{{#each viewList}}
+@Builder
+function {{viewName}}Builder(path: Object) {
+  {{viewName}}();
+}
+export function {{viewName}}Register(group:string,name: string) {
+  if (AppRouter.hasBuilder(group, name)) {
+    return
+  }
+  AppRouter.registerAppRouterPage(group,name,wrapBuilder({{viewName}}Builder));
+}
+
+{{/each}}
