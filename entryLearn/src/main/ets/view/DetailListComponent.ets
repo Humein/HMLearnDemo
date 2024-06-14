@@ -1,6 +1,7 @@
 import PageViewModel from '../viewmodel/PageViewModel';
 import { DataItem } from '../viewmodel/DataItem';
 import { CommonConstants } from '../constants/CommonConstants';
+import router from '@ohos.router';
 
 /**
  * Detail page list component.
@@ -23,7 +24,9 @@ export struct DetailListComponent {
             }
             .width(CommonConstants.ROW_WIDTH_PERCENT)
             .height($r('app.float.detail_list_item_height'))
-          }
+          }.onClick(() => {
+            router.pushUrl({ url: '' })
+          })
         }, (item: DataItem, index?: number) => index + JSON.stringify(item));
       }
       .width(CommonConstants.LIST_WIDTH_PERCENT)

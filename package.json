@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "app_router_hvigor_plugin": "^1.0.3",
+    "hvigor-easy-router-plugin": "^0.9.412"
+  }
+}
