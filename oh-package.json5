@@ -1,4 +1,5 @@
 {
+  "modelVersion": "5.0.0",
   "name": "hmlearndemo",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
@@ -8,10 +9,12 @@
   "dependencies": {
   },
   "devDependencies": {
-    "@zhongrui/app_router": "^1.0.1",//https://ohpm.openharmony.cn/#/cn/detail/@zhongrui%2Fapp_router
-    "@easy/router": "^0.2.8",//https://ohpm.openharmony.cn/#/cn/detail/@easy%2Frouter
+    "@zhongrui/app_router": "^1.0.1",
+    //https://ohpm.openharmony.cn/#/cn/detail/@zhongrui%2Fapp_router
+    "@easy/router": "^0.2.8",
+    //https://ohpm.openharmony.cn/#/cn/detail/@easy%2Frouter
     "@ohos/hypium": "1.0.16",
     "@ohos/hamock": "1.0.0"
   },
-  "dynamicDependencies": {}
+  "dynamicDependencies": {},
 }
